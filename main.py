@@ -23,7 +23,7 @@ segmentos = []
 for i in range(3):
     segmento = Turtle()
     segmento.shape("square")
-    segmento.color("white")
+    segmento.color("red")
     segmento.penup()
     segmento.goto(-20 * (i + 1), 0)
     segmentos.append(segmento)
