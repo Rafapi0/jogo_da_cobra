@@ -8,6 +8,7 @@ screen.bgcolor("black")
 screen.title("Jogo da Cobra")
 
 
+
 cobra = Turtle()
 cobra.shape("square")
 cobra.color("white")
@@ -94,7 +95,8 @@ screen.onkey(ir_direita, "d")
 def loop_jogo():
     global pontuacao
     mover()
-
+    screen.tracer(0)
+    screen.update()
     
     if cobra.distance(comida) < 20:
         comida.goto(random.randint(-280, 280), random.randint(-280, 280))
@@ -111,7 +113,7 @@ def loop_jogo():
         marcador.clear()
         marcador.write(f"Pontuação: {pontuacao}", align="center", font=("Arial", 24, "normal"))
 
-    screen.ontimer(loop_jogo, 0)
+    screen.ontimer(loop_jogo, 90)
 
 loop_jogo()
 
