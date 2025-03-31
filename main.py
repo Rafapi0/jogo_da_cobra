@@ -36,6 +36,8 @@ comida.color("red")
 comida.penup()
 comida.speed(0)
 comida.goto(random.randint(-280, 280), random.randint(-280, 280))
+comida.shapesize(stretch_wid=0.5, stretch_len=0.5)
+comida.speed("fastest")
 
 
 pontuacao = 0
@@ -44,7 +46,7 @@ marcador.color("white")
 marcador.penup()
 marcador.hideturtle()
 marcador.goto(0, 260)
-marcador.write(f"Pontuação: {pontuacao}", align="center", font=("Arial", 24, "normal"))
+marcador.write(f"Pontuação: {pontuacao}", align="center", font=("Courier", 24, "normal"))
 
 
 def mover():
@@ -98,7 +100,7 @@ def loop_jogo():
     screen.tracer(0)
     screen.update()
     
-    if cobra.distance(comida) < 20:
+    if cobra.distance(comida) < 15:
         comida.goto(random.randint(-280, 280), random.randint(-280, 280))
 
         
@@ -106,12 +108,22 @@ def loop_jogo():
         novo_segmento.shape("square")
         novo_segmento.color("white")
         novo_segmento.penup()
+        novo_segmento.speed("fastest")
         segmentos.append(novo_segmento)
 
         
         pontuacao += 1
         marcador.clear()
-        marcador.write(f"Pontuação: {pontuacao}", align="center", font=("Arial", 24, "normal"))
+        marcador.write(f"Pontuação: {pontuacao}", align="center", font=("Courier", 24, "normal"))
+    
+    if cobra.xcor() > 290 or cobra.xcor() < -290 or cobra.ycor() > 290 or cobra.ycor() < -290:
+        marcador.clear()
+        screen.update()
+        marcador.goto(0, 0)
+        marcador.write(f"Pontuação: {pontuacao}\n  Perdeste", align="center", font=("Courier", 24, "normal"))
+        screen.update()
+        return
+
 
     screen.ontimer(loop_jogo, 90)
 
